@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adit's Social Button Generator</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+
+</head>
+<body>
+
+    <div class="background"></div>
+
+    <div class="header">
+        <h1>Adit's Social Button Generator</h1>
+        <p>A simple Web App for generating social media buttons, mainly used to decorate github README profile but can be used for other else</p>
+        <p><small>
+            Made By <a href="adit.madbyad.my.id">Aditya Wahyu Santoso</a>
+            <a href="madbyad.my.id"><i>(MadByAd)</i></a>
+            &copy; 2026 <a href="madbyad.my.id">MadByAd</a>
+        </small></p>
+    </div>
+
+    <div class="container">
+        <div id="export-wrapper">
+            <div class="button">
+                <img id="button-app" src="https://cdn.simpleicons.org/instagram" width="54" />
+                <p id="button-text">@aditya_wahyu_dev</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="control">
+        <div>
+            <label for="input-button-text">Button Display Text</label>
+            <input
+                type="text"
+                name="input-button-text"
+                id="input-button-text"
+                value="@aditya_wahyu_dev"
+                oninput="update_button_text(this.value)">
+        </div>
+        <div>
+            <label for="input-app-image">Button Display App Image</label>
+            <input
+                type="text"
+                name="input-app-image"
+                id="input-app-image"
+                value="instagram"
+                placeholder="Enter App Name"
+                oninput="update_app_image()">
+        </div>
+        <div>
+            <label for="input-app-color">Button App Color</label>
+            <input
+                type="color"
+                name="input-app-color"
+                id="input-app-color"
+                value="#ffffff"
+                oninput="update_app_image()">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+            <label for="background-use-gradient">Use Custom App Color</label>
+            <input
+                type="checkbox"
+                name="input-use-app-custom-color"
+                id="input-use-app-custom-color"
+                style="transform: scale(200%);"
+                oninput="update_app_image()">
+        </div>
+        <hr>
+        <div style="display: flex; gap: 1rem;">
+            <label for="background-use-gradient">Use Gradient</label>
+            <input
+                type="checkbox"
+                name="background-use-gradient"
+                id="background-use-gradient"
+                style="transform: scale(200%);"
+                onclick="
+                if (this.checked) {
+                    document.getElementById('control-background-gradient').style.display = 'grid';
+                    document.getElementById('control-background-plain').style.display = 'none';
+                    update_background_gradient();
+                } else {
+                    document.getElementById('control-background-gradient').style.display = 'none';
+                    document.getElementById('control-background-plain').style.display = 'grid';
+                    update_background_color(document.getElementById('input-background-color').value);
+                }">
+        </div>
+        <div id="control-background-gradient" class="control-gradient" style="display: none;">
+            <div>
+                <label for="input-gradient-start">Gradient Start Color</label>
+                <input
+                    type="color"
+                    name="input-gradient-start"
+                    id="input-gradient-start"
+                    value="#ffffff"
+                    oninput="update_background_gradient()">
+            </div>
+            <div>
+                <label for="input-gradient-end">Gradient End Color</label>
+                <input
+                    type="color"
+                    name="input-gradient-end"
+                    id="input-gradient-end"
+                    value="#000000"
+                    oninput="update_background_gradient()">
+            </div>
+            <div>
+                <label for="input-gradient-angle">Angle</label>
+                <input
+                    type="number"
+                    name="input-gradient-angle"
+                    id="input-gradient-angle"
+                    value="90"
+                    oninput="update_background_gradient()">
+            </div>
+        </div>
+        <div id="control-background-plain" style="display: grid;">
+            <label for="input-background-color">Background Color</label>
+            <input
+                type="color"
+                name="input-background-color"
+                id="input-background-color"
+                value="#ffffff"
+                oninput="update_background_color(this.value)">
+        </div>
+        <div style="display: grid;">
+            <label for="input-text-color">Text Color</label>
+            <input
+                type="color"
+                name="input-text-color"
+                id="input-text-color"
+                value="#000000"
+                oninput="update_text_color(this.value)">
+        </div>
+        <div>
+            <label for="input-button-radius" id="border-radius">Border Radius (5px)</label>
+            <input
+                type="range"
+                id="input-button-radius"
+                name="input-button-radius"
+                min="0"
+                max="50"
+                value="5"
+                oninput="update_radius(this.value)">
+        </div>
+        <div>
+            <label for="input-button-radius" id="shadow-intensity">Shadow Intensity (5)</label>
+            <input
+                type="range"
+                id="input-shadow-intensity"
+                name="input-shadow-intensity"
+                min="0"
+                max="100"
+                value="10"
+                oninput="update_shadow(this.value)">
+        </div>
+        <div>
+            <label for="input-scaling" id="scaling">Export Scaling (1)</label>
+            <input
+                type="range"
+                id="input-scaling"
+                name="input-scaling"
+                min="0"
+                max="25"
+                value="10"
+                oninput="update_scaling(this.value)">
+        </div>
+        <button class="save-button" onclick="exportButton()">Save</button>
+    </div>
+
+    <script>
+        let button = document.querySelector(".button");
+        let scaling = 1.0;
+
+        function update_app_image() {
+            let app_name = document.getElementById("input-app-image").value;
+            let app_color = document.getElementById("input-app-color").value;
+            let app_use_custom_color = document.getElementById("input-use-app-custom-color");
+            let app_image = document.getElementById("button-app");
+
+            if (app_use_custom_color.checked) {
+                app_image.src = `https://cdn.simpleicons.org/${app_name}/${app_color.replace("#", "")}`;
+            } else {
+                app_image.src = `https://cdn.simpleicons.org/${app_name}`;
+            }
+        }
+
+        function update_button_text(value) {
+            document.getElementById("button-text").innerText = value;
+        }
+
+        function update_text_color(value) {
+            document.getElementById("button-text").style.color = value;
+        }
+
+        function update_background_gradient() {
+            let gradient_start = document.getElementById("input-gradient-start").value;
+            let gradient_end = document.getElementById("input-gradient-end").value;
+            let gradient_angle = document.getElementById("input-gradient-angle").value;
+            button.style.background = `linear-gradient(${gradient_angle}deg, ${gradient_start}, ${gradient_end})`;
+        }
+
+        function update_background_color(value) {
+            button.style.background = value;
+        }
+
+        function update_radius(value) {
+            button.style.borderRadius = `${value}px`;
+            document.getElementById("border-radius").innerText = `Border Radius (${value}px)`;
+        }
+
+        function update_shadow(value) {
+            button.style.boxShadow = `0 0 8px rgba(0, 0, 0, ${value / 100})`;
+            document.getElementById("shadow-intensity").innerText = `Shadow Intensity (${value})`;
+        }
+
+        function update_scaling(value) {
+            scaling = value / 10;
+            document.getElementById("scaling").innerText = `Export Scaling (${scaling})`;
+        }
+
+        update_radius(16);
+        update_shadow(20);
+
+        async function exportButton() {
+            const node = document.getElementById('export-wrapper');
+
+            try {
+                const dataUrl = await htmlToImage.toPng(node, {
+                    quality: 1,
+                    pixelRatio: scaling,
+                    skipFonts: false,
+                });
+
+                const link = document.createElement('a');
+                link.download = `${document.getElementById("input-app-image").value}-social-button.png`;
+                link.href = dataUrl;
+                link.click();
+            } catch (error) {
+                console.error('Oops, something went wrong!', error);
+            }
+        }
+    </script>
+
+</body>
+</html>
