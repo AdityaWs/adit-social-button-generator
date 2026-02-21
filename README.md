@@ -8,12 +8,12 @@ To start making your own social media button for whatever your purpose is, just 
 ## Example Buttons
 
 [![Instagram Social Button](./examples/instagram-social-button.png)](https://instagram.com/aditya_wahyu_dev)
-[![Instagram Social Button](./examples/youtube-social-button.png)](https://youtube.com/@aditya-wahyu-dev)
-[![Instagram Social Button](./examples/blogger-social-button.png)](https://blog.madbyad.my.id)
-[![Instagram Social Button](./examples/github-social-button.png)](https://github.com/MadByAd)
-[![Instagram Social Button](./examples/html5-social-button.png)](https://adit.madbyad.my.id)
-[![Instagram Social Button](./examples/itch.io-social-button.png)](https://madbyad.itch.io)
-[![Instagram Social Button](./examples/googleplay-social-button.png)](https://playstore.madbyad.my.id)
+[![YouTube Social Button](./examples/youtube-social-button.png)](https://youtube.com/@aditya-wahyu-dev)
+[![Blogger Site Button](./examples/blogger-social-button.png)](https://blog.madbyad.my.id)
+[![Github Social Button](./examples/github-social-button.png)](https://github.com/MadByAd)
+[![Website Link Button](./examples/html5-social-button.png)](https://adit.madbyad.my.id)
+[![Itch.Io Page Button](./examples/itch.io-social-button.png)](https://madbyad.itch.io)
+[![Playstore Page Button](./examples/googleplay-social-button.png)](https://playstore.madbyad.my.id)
 
 ## How to Embed in Markdown?
 
@@ -27,10 +27,10 @@ and here is the code for the social button in the example section
 
 ```MD
 [![Instagram Social Button](./examples/instagram-social-button.png)](https://instagram.com/aditya_wahyu_dev)
-[![Instagram Social Button](./examples/youtube-social-button.png)](https://youtube.com/@aditya-wahyu-dev)
-[![Instagram Social Button](./examples/blogger-social-button.png)](https://blog.madbyad.my.id)
-[![Instagram Social Button](./examples/github-social-button.png)](https://github.com/MadByAd)
-[![Instagram Social Button](./examples/html5-social-button.png)](https://adit.madbyad.my.id)
-[![Instagram Social Button](./examples/itch.io-social-button.png)](https://madbyad.itch.io)
-[![Instagram Social Button](./examples/googleplay-social-button.png)](https://playstore.madbyad.my.id)
+[![YouTube Social Button](./examples/youtube-social-button.png)](https://youtube.com/@aditya-wahyu-dev)
+[![Blogger Site Button](./examples/blogger-social-button.png)](https://blog.madbyad.my.id)
+[![Github Social Button](./examples/github-social-button.png)](https://github.com/MadByAd)
+[![Website Link Button](./examples/html5-social-button.png)](https://adit.madbyad.my.id)
+[![Itch.Io Page Button](./examples/itch.io-social-button.png)](https://madbyad.itch.io)
+[![Playstore Page Button](./examples/googleplay-social-button.png)](https://playstore.madbyad.my.id)
 ```
